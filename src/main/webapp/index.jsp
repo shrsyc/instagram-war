@@ -3,25 +3,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome Page</title>
+    <title>Hello DevOps</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+    </style>
 </head>
 <body>
-    <h2>Welcome to My Website</h2>
-
-    <%-- Form to take user input --%>
-    <form action="welcome.jsp" method="post">
-        Enter your name: <input type="text" name="username" required>
-        <input type="submit" value="Submit">
-    </form>
-
-    <%-- Processing the input and displaying a welcome message --%>
-    <%
-        String name = request.getParameter("username");
-        if (name != null && !name.trim().isEmpty()) {
-    %>
-        <h3>Hello, <%= name %>! Welcome to our site.</h3>
-    <%
-        }
-    %>
+    <h1>Hello DevOps</h1>
 </body>
 </html>
