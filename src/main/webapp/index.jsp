@@ -36,7 +36,7 @@
 <body>
     <h1>Project flow</h1>
     <div class="image-container">
-        <img src="https://sakit333.github.io/sakops/images/Project_2.jpg">
+        <img src="https://sakit333.github.io/sakops/images/Project_2.jpg" height="600">
        
         
     </div>
