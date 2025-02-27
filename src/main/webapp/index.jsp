@@ -36,8 +36,8 @@
 <body>
     <h1>Hello DevOps</h1>
     <div class="image-container">
-        <img src="https://media.licdn.com/dms/image/v2/D5603AQGPLlVm7nUpKQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1688133732925?e=1746057600&v=beta&t=OlI6SXz0MGF6LY3fA7hb5a6uWB7fOfaDguuI3IL-UFw" alt="DevOps Image">
-        <img src="https://media.licdn.com/dms/image/v2/D4E03AQHdlai2u8dGBA/profile-displayphoto-shrink_800_800/B4EZPodzQ5HgAc-/0/1734771947477?e=1746057600&v=beta&t=qjnExS_t-583dcyS2ZjdUyDRR-M4_u7JH2KYFzL-EiQ" alt="CI/CD Pipeline">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Devops-toolchain.svg/1200px-Devops-toolchain.svg.png" alt="DevOps Image">
+       
         
     </div>
 </body>
