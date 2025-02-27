@@ -36,11 +36,9 @@
 <body>
     <h1>Hello DevOps</h1>
     <div class="image-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Devops-toolchain.svg/1200px-Devops-toolchain.svg.png" alt="DevOps Image">
-        <img src="https://miro.medium.com/v2/resize:fit:1400/1*czJ2Hi9xPEPqAd3Np8qCMg.png" alt="CI/CD Pipeline">
-        <img src="https://www.innominds.com/hubfs/DevOps%20image.jpg" alt="DevOps Workflow">
-        <img src="https://cdn.educba.com/academy/wp-content/uploads/2020/02/What-is-DevOps.png" alt="DevOps Concept">
-        <img src="https://www.redhat.com/sysadmin/sites/default/files/styles/embed_large/public/2022-04/devops-vs-agile-lead_1.png?itok=s6w3bRT_" alt="DevOps vs Agile">
+        <img src="https://media.licdn.com/dms/image/v2/D5603AQGPLlVm7nUpKQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1688133732925?e=1746057600&v=beta&t=OlI6SXz0MGF6LY3fA7hb5a6uWB7fOfaDguuI3IL-UFw" alt="DevOps Image">
+        <img src="https://media.licdn.com/dms/image/v2/D4E03AQHdlai2u8dGBA/profile-displayphoto-shrink_800_800/B4EZPodzQ5HgAc-/0/1734771947477?e=1746057600&v=beta&t=qjnExS_t-583dcyS2ZjdUyDRR-M4_u7JH2KYFzL-EiQ" alt="CI/CD Pipeline">
+        
     </div>
 </body>
 </html>
