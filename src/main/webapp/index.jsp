@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Ranjan</title>
+    <title>Hello DevOps</title>
     <style>
         body {
             display: flex;
@@ -17,16 +17,30 @@
         }
         h1 {
             font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
         img {
-            width: 400px; /* Adjust size as needed */
-            margin-top: 20px;
+            width: 200px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
     <h1>Hello DevOps</h1>
-    <img src="https://media.licdn.com/dms/image/v2/D5603AQGPLlVm7nUpKQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1688133732925?e=1746057600&v=beta&t=OlI6SXz0MGF6LY3fA7hb5a6uWB7fOfaDguuI3IL-UFw" 
-         alt="DevOps Image">
+    <div class="image-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Devops-toolchain.svg/1200px-Devops-toolchain.svg.png" alt="DevOps Image">
+        <img src="https://miro.medium.com/v2/resize:fit:1400/1*czJ2Hi9xPEPqAd3Np8qCMg.png" alt="CI/CD Pipeline">
+        <img src="https://www.innominds.com/hubfs/DevOps%20image.jpg" alt="DevOps Workflow">
+        <img src="https://cdn.educba.com/academy/wp-content/uploads/2020/02/What-is-DevOps.png" alt="DevOps Concept">
+        <img src="https://www.redhat.com/sysadmin/sites/default/files/styles/embed_large/public/2022-04/devops-vs-agile-lead_1.png?itok=s6w3bRT_" alt="DevOps vs Agile">
+    </div>
 </body>
 </html>
