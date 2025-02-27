@@ -26,7 +26,7 @@
             flex-wrap: wrap;
         }
         img {
-            width: 200px; /* Adjust size as needed */
+            width: 800px; /* Adjust size as needed */
             height: auto;
             border-radius: 10px;
             box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
@@ -36,7 +36,7 @@
 <body>
     <h1>Project flow</h1>
     <div class="image-container">
-        <img src="https://sakit333.github.io/sakops/images/Project_2.jpg" height="600">
+        <img src="https://sakit333.github.io/sakops/images/Project_2.jpg">
        
         
     </div>
