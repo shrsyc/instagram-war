@@ -34,9 +34,9 @@
     </style>
 </head>
 <body>
-    <h1>Hello DevOps</h1>
+    <h1>Project flow</h1>
     <div class="image-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Devops-toolchain.svg/1200px-Devops-toolchain.svg.png" alt="DevOps Image">
+        <img src="https://sakit333.github.io/sakops/images/Project_2.jpg">
        
         
     </div>
