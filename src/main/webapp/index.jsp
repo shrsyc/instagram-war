@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello DevOps</title>
+    <title>Hello Ranjan</title>
     <style>
         body {
             display: flex;
@@ -26,7 +26,7 @@
 </head>
 <body>
     <h1>Hello DevOps</h1>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Devops-toolchain.svg/1200px-Devops-toolchain.svg.png" 
+    <img src="https://media.licdn.com/dms/image/v2/D5603AQGPLlVm7nUpKQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1688133732925?e=1746057600&v=beta&t=OlI6SXz0MGF6LY3fA7hb5a6uWB7fOfaDguuI3IL-UFw" 
          alt="DevOps Image">
 </body>
 </html>
