@@ -322,7 +322,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./assets/images/Spring.png" alt="camera icon" width="40">
+                <img src="./assets/images/cloud.png" alt="camera icon" width="40">
               </div>
 
               <div class="service-content-box">
