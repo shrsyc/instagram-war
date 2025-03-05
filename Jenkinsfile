@@ -3,44 +3,38 @@ pipeline {
     tools {
         maven 'maven'
     }
+    environment {
+        IMAGE_NAME = "marcos"
+        WORKER_NODE = "172.31.15.150"  // Private IP of the worker node
+        ANSIBLE_USER = "ansible"       // SSH user for Ansible
+    }
     stages {
         stage("Pull SRC") {
             steps {
                 git 'https://github.com/shrsyc/instagram-war.git'
             }
         }
-        stage("Prepare Build") {
+        stage("Build with Maven") {
             steps {
                 sh 'mvn clean package'
             }
         }
-        stage("Copy *.war file to ansible") {
+        stage("Build Docker Image") {
             steps {
-                sh 'mv target/instagram.war .'
-                sshPublisher(
-                    continueOnError: false, 
-                    failOnError: true,
-                    publishers: [
-                        sshPublisherDesc(
-                            configName: "marcos",
-                            transfers: [sshTransfer(sourceFiles: 'instagram.war')],
-                            verbose: true
-                        )
-                    ]
-                )
+                sh 'docker build -t $IMAGE_NAME .'
+                sh 'docker save -o $IMAGE_NAME.tar $IMAGE_NAME'  // Save image as a tar file
             }
         }
-        stage("Copy Docker file to ansible") {
+        stage("Transfer Image to Worker Node") {
             steps {
                 sshPublisher(
                     continueOnError: false, 
                     failOnError: true,
                     publishers: [
                         sshPublisherDesc(
-                            configName: "marcos",
+                            configName: "ansible", // Should be configured in Jenkins SSH settings
                             transfers: [
-                                sshTransfer(sourceFiles: 'Dockerfile'),
-                                sshTransfer(execCommand: "docker rm -f tomcat; docker rmi marcos; docker build -t marcos .; docker run -it -d -p 8081:8080 --name tomcat marcos")
+                                sshTransfer(sourceFiles: "$IMAGE_NAME.tar", removePrefix: "", remoteDirectory: "/home/$ANSIBLE_USER")
                             ],
                             verbose: true
                         )
@@ -48,5 +42,6 @@ pipeline {
                 )
             }
         }
+        
     }
 }
