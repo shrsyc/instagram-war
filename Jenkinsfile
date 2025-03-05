@@ -3,44 +3,59 @@ pipeline {
     tools {
         maven 'maven'
     }
+    environment {
+        TARGET_SERVER = "ansible@172.31.15.150" 
+        IMAGE_NAME = "marcos" 
+    }
     stages {
         stage("Pull SRC") {
             steps {
                 git 'https://github.com/shrsyc/instagram-war.git'
             }
         }
-        stage("Prepare Build") {
+        stage("Build with Maven") {
             steps {
                 sh 'mvn clean package'
             }
         }
-        stage("Copy *.war file to ansible") {
+        stage("Build Docker Image") {
             steps {
-                sh 'mv target/instagram.war .'
+                sh 'docker build -t $IMAGE_NAME .'
+                sh 'docker save -o $IMAGE_NAME.tar $IMAGE_NAME' // Save the image as a tar file
+            }
+        }
+        stage("Transfer Docker Image to Ansible Worker") {
+            steps {
                 sshPublisher(
                     continueOnError: false, 
                     failOnError: true,
                     publishers: [
                         sshPublisherDesc(
-                            configName: "marcos",
-                            transfers: [sshTransfer(sourceFiles: 'instagram.war')],
+                            configName: "ansible-worker", // This should be configured in Jenkins SSH settings
+                            transfers: [
+                                sshTransfer(sourceFiles: "marcos.tar", removePrefix: "", remoteDirectory: "/home/ansible-user")
+                            ],
                             verbose: true
                         )
                     ]
                 )
             }
         }
-        stage("Copy Docker file to ansible") {
+        stage("Deploy Container on Ansible Worker") {
             steps {
                 sshPublisher(
                     continueOnError: false, 
                     failOnError: true,
                     publishers: [
                         sshPublisherDesc(
-                            configName: "marcos",
+                            configName: "ansible-worker",
                             transfers: [
-                                sshTransfer(sourceFiles: 'Dockerfile'),
-                                sshTransfer(execCommand: "docker rm -f tomcat; docker rmi marcos; docker build -t marcos .; docker run -it -d -p 8081:8080 --name tomcat marcos")
+                                sshTransfer(execCommand: """
+                                    docker load -i /home/ansible-user/marcos.tar
+                                    docker stop tomcat || true
+                                    docker rm tomcat || true
+                                    docker run -d -p 8081:8080 --name tomcat marcos
+                                """)
                             ],
                             verbose: true
                         )
