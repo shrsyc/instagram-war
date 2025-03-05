@@ -3,38 +3,44 @@ pipeline {
     tools {
         maven 'maven'
     }
-    environment {
-        IMAGE_NAME = "marcos"
-        WORKER_NODE = "172.31.15.150"  // Private IP of the worker node
-        ANSIBLE_USER = "ansible"       // SSH user for Ansible
-    }
     stages {
         stage("Pull SRC") {
             steps {
                 git 'https://github.com/shrsyc/instagram-war.git'
             }
         }
-        stage("Build with Maven") {
+        stage("Prepare Build") {
             steps {
                 sh 'mvn clean package'
             }
         }
-        stage("Build Docker Image") {
+        stage("Copy *.war file to ansible") {
             steps {
-                sh 'docker build -t $IMAGE_NAME .'
-                sh 'docker save -o $IMAGE_NAME.tar $IMAGE_NAME'  // Save image as a tar file
+                sh 'mv target/instagram.war .'
+                sshPublisher(
+                    continueOnError: false, 
+                    failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: "marcos",
+                            transfers: [sshTransfer(sourceFiles: 'instagram.war')],
+                            verbose: true
+                        )
+                    ]
+                )
             }
         }
-        stage("Transfer Image to Worker Node") {
+        stage("Copy Docker file to ansible") {
             steps {
                 sshPublisher(
                     continueOnError: false, 
                     failOnError: true,
                     publishers: [
                         sshPublisherDesc(
-                            configName: "ansible", // Should be configured in Jenkins SSH settings
+                            configName: "marcos",
                             transfers: [
-                                sshTransfer(sourceFiles: "$IMAGE_NAME.tar", removePrefix: "", remoteDirectory: "/home/$ANSIBLE_USER")
+                                sshTransfer(sourceFiles: 'Dockerfile'),
+                                sshTransfer(execCommand: "docker rm -f tomcat; docker rmi marcos; docker build -t marcos .; docker run -it -d -p 8081:8080 --name tomcat marcos")
                             ],
                             verbose: true
                         )
@@ -42,6 +48,5 @@ pipeline {
                 )
             }
         }
-        
     }
 }
