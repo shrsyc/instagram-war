@@ -30,7 +30,7 @@ pipeline {
                 )
             }
         }
-        stage("Copy Docker file to ansible") {
+        stage("Copy Docker file to ansible to push docker immage to dockerhub") {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                 sshPublisher(
@@ -54,6 +54,26 @@ pipeline {
                     ]
                 )
             }
+            }
+        }
+        stage("Copy playbook file to ansible and execute") {
+            steps {
+               
+                sshPublisher(
+                    continueOnError: false, 
+                    failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: "marcos",
+                            transfers: [
+                                sshTransfer(sourceFiles: 'ansible_playbook.yml'),
+                                sshTransfer(execCommand: ansible-playbook ansible_playbook.yml)
+                            ],
+                            verbose: true
+                        )
+                    ]
+                )
+            
             }
         }
     }
