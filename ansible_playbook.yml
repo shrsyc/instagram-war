@@ -14,4 +14,4 @@
       command: docker rm -f webtrial
 
     - name: Run new container
-      command: docker run -d --name webtrial -p 8080:8080 shrsyc/webtrial
+      command: docker run -d --name webtrial -p 8081:8080 shrsyc/webtrial
