@@ -32,7 +32,7 @@ pipeline {
         }
         stage("Copy Docker file to ansible") {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                 sshPublisher(
                     continueOnError: false, 
                     failOnError: true,
