@@ -67,7 +67,7 @@ pipeline {
                             configName: "marcos",
                             transfers: [
                                 sshTransfer(sourceFiles: 'ansible_playbook.yml'),
-                                sshTransfer(execCommand: ansible-playbook ansible_playbook.yml)
+                                sshTransfer(execCommand: "ansible-playbook ansible_playbook.yml")
                             ],
                             verbose: true
                         )
