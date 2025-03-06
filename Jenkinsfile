@@ -32,6 +32,7 @@ pipeline {
         }
         stage("Copy Docker file to ansible") {
             steps {
+                withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                 sshPublisher(
                     continueOnError: false, 
                     failOnError: true,
@@ -40,12 +41,19 @@ pipeline {
                             configName: "marcos",
                             transfers: [
                                 sshTransfer(sourceFiles: 'Dockerfile'),
-                                sshTransfer(execCommand: "docker rm -f tomcat; docker rmi marcos; docker build -t marcos .; docker run -it -d -p 8081:8080 --name tomcat marcos")
+                                sshTransfer(execCommand: """
+                                docker rm -f tomcat || true
+                                docker rmi -f $DOCKER_USER/webapp_portfolio || true
+                                docker build -t $DOCKER_USER/webapp_portfolio .
+                                echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                                docker push $DOCKER_USER/webapp_portfolio
+                                """)
                             ],
                             verbose: true
                         )
                     ]
                 )
+            }
             }
         }
     }
